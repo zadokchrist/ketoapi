@@ -3,10 +3,9 @@ from .models import User
 
 class RegistrationSerialiser(serializers.ModelSerializer):
     #Password = serializers.CharField(write_only=True)
-    
     class Meta:
         model = User
-        fields = ['Firstname','LastName','Username','Email','PhoneNumber','Is_Varified','Is_active','Created_At']
+        fields = ['Firstname','LastName','Username','Email','PhoneNumber']
     
     def validate(self, attrs):
         firstname = attrs.get('Firstname','')
@@ -23,3 +22,9 @@ class RegistrationSerialiser(serializers.ModelSerializer):
     
     def create(self, validated_data):
         return User.objects.create(**validated_data)
+    
+class UsersSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['FirstName','LastName','Username','Email','PhoneNumber']
